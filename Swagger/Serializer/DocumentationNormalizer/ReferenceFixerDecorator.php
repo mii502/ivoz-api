@@ -172,17 +172,20 @@ class ReferenceFixerDecorator implements NormalizerInterface, CacheableSupportsM
         ];
 
         $isCollection = ($property['type'] ?? null)  === 'array';
-        if ($this->isEntity($property['$ref'], $definitions) && in_array($context, $noSublevelContexts) && !$isCollection) {
+        $hasRef = isset($property['$ref']);
+        $hasItemsRef = isset($property['items']['$ref']);
+
+        if ($hasRef && $this->isEntity($property['$ref'], $definitions) && in_array($context, $noSublevelContexts) && !$isCollection) {
             unset($property['$ref']);
             $property['type'] = 'integer';
 
             return $property;
         }
 
-        if ($property['$ref']) {
+        if ($hasRef) {
             $refSegments = explode('-', $property['$ref']);
             $property['$ref'] = $refSegments[0];
-        } else if ($isCollection && $property['items']['$ref']) {
+        } else if ($isCollection && $hasItemsRef) {
             $refSegments = explode('-', $property['items']['$ref']);
             $property['items']['$ref'] = $refSegments[0];
         }

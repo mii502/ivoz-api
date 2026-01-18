@@ -77,7 +77,7 @@ class UnusedDefinitionRemover implements NormalizerInterface, CacheableSupportsM
                     if (!isset($parameter['schema'])) {
                         continue;
                     }
-                    $ref = $parameter['schema']['$ref'];
+                    $ref = $parameter['schema']['$ref'] ?? null;
 
                     if (is_null($ref)) {
                         continue;
