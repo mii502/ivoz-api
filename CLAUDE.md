@@ -134,7 +134,7 @@ ssh user@185.16.41.36 "cd /opt/irontec/ivozprovider/web/rest/client && sudo -u w
 ### 5. Verify
 
 ```bash
-curl -s -k "https://brand.ivoz.voip.ing/api/brand/docs.json" | head -1
+curl -s -k "https://brand.pbx.voip.ing/api/brand/docs.json" | head -1
 # Should return: {"swagger":"2.0",...
 ```
 
